@@ -44,6 +44,10 @@ app.use("/api/coupons", couponRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
 app.listen(PORT, () => {
-  console.log("Server is running on http://localhost:" + PORT);
+  const url =
+    process.env.NODE_ENV === "production"
+      ? "Hosted on Render or Cloud"
+      : `http://localhost:${PORT}`;
+  console.log(`✅ Server is running at: ${url}`);
   connectDB();
 });
