@@ -140,10 +140,11 @@ export const refreshToken = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
-      maxAge: 15 * 60 * 1000,
+      maxAge: 15 * 60 * 1000, // 15 minutes
     });
 
-    res.json({ message: "Token refreshed successfully" });
+    // ✅ ADD THIS LINE: send accessToken in response body too
+    res.json({ accessToken });
   } catch (error) {
     console.log("Error in refreshToken controller", error.message);
     res.status(500).json({ message: "Server error", error: error.message });
